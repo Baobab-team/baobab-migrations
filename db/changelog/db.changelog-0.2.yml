@@ -1,0 +1,71 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 2
+      author: komlan55
+      comments: Add business table
+      changes:
+          - createTable:
+              tableName: tbl_businesses
+              columns:
+                  - column:
+                      name: id
+                      type: BIGINT
+                      constraints:
+                          primaryKey: true
+                          nullable: false
+                          autoIncrement: true
+                  - column:
+                      name: name
+                      type: varchar(255)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: description
+                      type: varchar(255)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: email
+                      type: varchar(255)
+                      constraints:
+                          nullable: false
+                          unique: true
+                  - column:
+                      name: status
+                      type: varchar(255)
+                  - column:
+                      name: accepted_at
+                      type:  Timestamp
+                      constraints:
+                          nullable: true
+                  - column:
+                      name: notes
+                      type: varchar(255)
+                      constraints:
+                          nullable: true
+                  - column:
+                      name: capacity
+                      type: varchar(255)
+                      constraints:
+                          nullable: true
+                  - column:
+                      name: category_id
+                      type: int
+                      constraints:
+                          nullable: true
+          - addDefaultValue:
+              tableName:  tbl_businesses
+              columnName:  status
+              defaultValue:  pending
+          - addForeignKeyConstraint:
+              baseColumnNames:  category_id
+              baseTableName:  tbl_businesses
+              constraintName:  fk_tbl_businesses_tbl_categories
+              onDelete:  SET NULL
+              onUpdate:  CASCADE
+              referencedColumnNames:  id
+              referencedTableName:  tbl_categories
+      rollback:
+          - dropTable:
+              tableName: tbl_businesses

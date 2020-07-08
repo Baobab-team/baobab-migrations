@@ -1,0 +1,28 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 1
+      author: komlan55
+      comments: Add category table
+      changes:
+          - createTable:
+              tableName: tbl_categories
+              columns:
+                  - column:
+                      name: id
+                      type: BIGINT
+                      constraints:
+                          primaryKey: true
+                          nullable: false
+                  - column:
+                      name: name
+                      type: varchar(255)
+                      constraints:
+                          nullable: false
+                          unique: false
+          - addAutoIncrement:
+              tableName: tbl_categories
+              columnName: id
+      rollback:
+        - dropTable:
+            tableName: tbl_categories

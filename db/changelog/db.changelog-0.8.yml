@@ -1,0 +1,119 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 8
+      author: komlan55
+      comments: Add restaurant related tables
+      changes:
+        - createTable:
+            tableName: tbl_restaurants
+            columns:
+                - column:
+                    name: id
+                    type: BIGINT
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                      autoIncrement: true
+        - addColumn:
+            tableName: tbl_businesses
+            columns:
+            - column:
+                name: restaurant_id
+                type: int
+                constraints:
+                  nullable: true
+        - addForeignKeyConstraint:
+            baseColumnNames:  restaurant_id
+            baseTableName:  tbl_businesses
+            constraintName:  fk_tbl_businesses_tbl_restaurants
+            onDelete:  SET NULL
+            onUpdate:  CASCADE
+            referencedColumnNames:  id
+            referencedTableName:  tbl_restaurants
+        - createTable:
+            tableName: tbl_menus
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    autoIncrement: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start
+                  type: Time with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end
+                  type: Time with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: restaurant_id
+                  type: int
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames:  restaurant_id
+            baseTableName:  tbl_menus
+            constraintName:  fk_tbl_menus_tbl_restaurants
+            onDelete:  CASCADE
+            onUpdate:  CASCADE
+            referencedColumnNames:  id
+            referencedTableName:  tbl_restaurants
+        - createTable:
+            tableName: tbl_plates
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    autoIncrement: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: FLOAT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: menu_id
+                  type: int
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames:  menu_id
+            baseTableName:  tbl_plates
+            constraintName:  fk_tbl_plates_tbl_menus
+            onDelete:  CASCADE
+            onUpdate:  CASCADE
+            referencedColumnNames:  id
+            referencedTableName:  tbl_menus
+      rollback:
+        - dropTable:
+            tableName: tbl_plates
+        - dropTable:
+            tableName: tbl_menus
+        - dropColumn:
+            tableName: tbl_businesses
+            columnName: restaurant_id
+        - dropTable:
+            tableName: tbl_restaurants

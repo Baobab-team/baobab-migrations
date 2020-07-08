@@ -1,0 +1,73 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 5
+      author: komlan55
+      comments: Add address table
+      changes:
+          - createTable:
+              tableName: tbl_addresses
+              columns:
+                  - column:
+                      name: id
+                      type: BIGINT
+                      constraints:
+                          primaryKey: true
+                          nullable: false
+                          autoIncrement: true
+                  - column:
+                      name: street_name
+                      type: varchar(50)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: street_type
+                      type: varchar(50)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: street_number
+                      type: varchar(10)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: direction
+                      type: varchar(20)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: city
+                      type: varchar(20)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: zip_code
+                      type: varchar(20)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: province
+                      type: varchar(20)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: country
+                      type: varchar(20)
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: business_id
+                      type: int
+                      constraints:
+                          nullable: false
+          - addForeignKeyConstraint:
+              baseColumnNames:  business_id
+              baseTableName:  tbl_addresses
+              constraintName:  fk_tbl_addresses_tbl_businesses
+              onDelete:  CASCADE
+              onUpdate:  CASCADE
+              referencedColumnNames:  id
+              referencedTableName:  tbl_businesses
+      rollback:
+          - dropTable:
+              tableName: tbl_addresses

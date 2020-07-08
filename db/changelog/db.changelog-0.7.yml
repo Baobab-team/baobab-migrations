@@ -1,0 +1,60 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 7
+      author: komlan55
+      comments: Add tag table and its association table
+      changes:
+          - createTable:
+              tableName: tbl_tags
+              columns:
+                  - column:
+                      name: id
+                      type: BIGINT
+                      constraints:
+                          primaryKey: true
+                          nullable: false
+                          autoIncrement: true
+                  - column:
+                      name: name
+                      type: varchar(50)
+                      constraints:
+                          nullable: false
+          - createTable:
+              tableName: tbl_business_tags
+              columns:
+                  - column:
+                      name: business_id
+                      type: int
+                      constraints:
+                          nullable: false
+                  - column:
+                      name: tag_id
+                      type: int
+                      constraints:
+                          nullable: false
+          - addPrimaryKeyConstraint:
+              columnNames:  business_id, tag_id
+              constraintName:  pk_business_id_tag_id
+              tableName:  tbl_business_tags
+          - addForeignKeyConstraint:
+              baseColumnNames:  business_id
+              baseTableName:  tbl_business_tags
+              constraintName:  fk_tbl_business_tags_tbl_businesses
+              onDelete:  CASCADE
+              onUpdate:  CASCADE
+              referencedColumnNames:  id
+              referencedTableName:  tbl_businesses
+          - addForeignKeyConstraint:
+              baseColumnNames:  tag_id
+              baseTableName:  tbl_business_tags
+              constraintName:  fk_tbl_business_tags_tbl_tags
+              onDelete:  CASCADE
+              onUpdate:  CASCADE
+              referencedColumnNames:  id
+              referencedTableName:  tbl_tags
+      rollback:
+          - dropTable:
+              tableName: tbl_business_tags
+          - dropTable:
+              tableName: tbl_tags
