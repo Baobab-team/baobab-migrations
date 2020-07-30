@@ -1,7 +1,7 @@
 databaseChangeLog:
 
   - changeSet:
-      id: 5
+      id: add-tbl-addresses
       author: komlan55
       comments: Add address table
       changes:

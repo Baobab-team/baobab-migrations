@@ -1,7 +1,7 @@
 databaseChangeLog:
 
   - changeSet:
-      id: 2
+      id: add-tbl-businesses
       author: komlan55
       comments: Add business table
       changes:
@@ -52,6 +52,21 @@ databaseChangeLog:
                   - column:
                       name: category_id
                       type: int
+                      constraints:
+                          nullable: true
+                  - column:
+                      name: created_at
+                      type: Time with time zone
+                      constraints:
+                          nullable: true
+                  - column:
+                      name: updated_at
+                      type: Time with time zone
+                      constraints:
+                          nullable: true
+                  - column:
+                      name: deleted_at
+                      type: Time with time zone
                       constraints:
                           nullable: true
           - addDefaultValue:

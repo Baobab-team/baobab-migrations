@@ -1,12 +1,12 @@
 databaseChangeLog:
 
   - changeSet:
-      id: 4
+      id: add-social-links
       author: komlan55
-      comments: Add phone table
+      comments: Add social links table
       changes:
           - createTable:
-              tableName: tbl_phones
+              tableName: tbl_social_links
               columns:
                   - column:
                       name: id
@@ -16,15 +16,10 @@ databaseChangeLog:
                           nullable: false
                           autoIncrement: true
                   - column:
-                      name: number
-                      type: varchar(25)
+                      name: link
+                      type: varchar(50)
                       constraints:
                           nullable: false
-                  - column:
-                      name: extension
-                      type: varchar(20)
-                      constraints:
-                          nullable: true
                   - column:
                       name: type
                       type: varchar(20)
@@ -37,12 +32,12 @@ databaseChangeLog:
                           nullable: false
           - addForeignKeyConstraint:
               baseColumnNames:  business_id
-              baseTableName:  tbl_phones
-              constraintName:  fk_tbl_phones_tbl_businesses
+              baseTableName:  tbl_social_links
+              constraintName:  fk_tbl_social_links_tbl_businesses
               onDelete:  CASCADE
               onUpdate:  CASCADE
               referencedColumnNames:  id
               referencedTableName:  tbl_businesses
       rollback:
           - dropTable:
-              tableName: tbl_phones
+              tableName: tbl_social_links

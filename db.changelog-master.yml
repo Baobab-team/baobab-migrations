@@ -1,0 +1,31 @@
+databaseChangeLog:
+    - changeSet:
+        id:  tag_0
+        author:  komlan55
+        changes:
+        -  tagDatabase:
+            tag:  0.0
+    - include:
+        file: db/changelog/db.changelog-add-tbl-categories.yml
+    - include:
+        file: db/changelog/db.changelog-add-tbl-businesses.yml
+    - include:
+        file: db/changelog/db.changelog-add-tbl-businesses-hours.yml
+    - include:
+        file: db/changelog/db.changelog-add-tbl-phones.yml
+    - include:
+        file: db/changelog/db.changelog-add-tbl-addresses.yml
+    - include:
+        file: db/changelog/db.changelog-add-social-links.yml
+    - include:
+        file: db/changelog/db.changelog-add-tags.yml
+    - include:
+        file: db/changelog/db.changelog-add-restaurants-menus-plates-tables.yml
+    - include:
+        file: db/changelog/db.changelog-add-tbl-business-uploads.yml
+    - changeSet:
+        id:  tag_0.1
+        author:  komlan55
+        changes:
+        -  tagDatabase:
+            tag:  0.1

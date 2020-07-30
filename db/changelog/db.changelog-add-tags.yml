@@ -1,7 +1,7 @@
 databaseChangeLog:
 
   - changeSet:
-      id: 7
+      id: add-tags
       author: komlan55
       comments: Add tag table and its association table
       changes:

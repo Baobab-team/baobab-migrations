@@ -1,7 +1,7 @@
 databaseChangeLog:
 
   - changeSet:
-      id: 8
+      id: add-restaurants-menus-plates-tables
       author: komlan55
       comments: Add restaurant related tables
       changes:
