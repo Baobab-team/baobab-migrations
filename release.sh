@@ -2,7 +2,7 @@
 rm liquibase.properties
 cat <<EOT >> liquibase.properties
 changeLogFile:db.changelog-master.yml
-url: jdbc:$DATABASE_URL
+url: jdbc:$DB_URL
 driver: org.postgresql.Driver
 classpath:  liquibase/lib/postgresql-42.2.14.jar
 EOT
